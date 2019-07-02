@@ -1,0 +1,18 @@
+[package]
+name = "winetd"
+version = "0.1.0"
+authors = ["Leonid Genkin <lgenkin@infinidat.com>"]
+edition = "2018"
+
+[dependencies]
+log = "0.4.6"
+mio = "0.6.19"
+winapi = {version = "0.3.7", features = ["processenv", "synchapi", "impl-default", "impl-debug", "namedpipeapi", "errhandlingapi"
+]}
+config = "0.9"
+winlog = "*"
+snafu = "0.5.0"
+windows-service = "0.2.0"
+crossbeam-channel = "0.3.9"
+futures = "0.1"
+mio-extras = "2.0.5"

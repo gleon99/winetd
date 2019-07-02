@@ -1,0 +1,31 @@
+name: Release MSI
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  build-winetd-msi:
+    runs-on: windows-latest
+    steps:
+      - uses: hecrj/setup-rust-action@master
+      - uses: actions/checkout@master
+      - name: Cargo build
+        run: cargo build --release
+      - name: Cargo test
+        run: cargo test
+      - name: Download WiX
+        run: curl -LS https://github.com/wixtoolset/wix3/releases/download/wix3111rtm/wix311.exe > wix311.exe
+      - name: Install WiX
+        run: wix311.exe /install /quiet /norestart
+      - name: Prepare MSI file
+        run: '"%PROGRAMFILES(x86)%\WiX Toolset v3.11\bin\candle.exe" "winetd.wxs"'
+      - name: Link MSI
+        run: '"%PROGRAMFILES(x86)%\WiX Toolset v3.11\bin\light.exe" "winetd.wixobj" "-out" "winetd-%GITHUB_REF%.msi"'
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: ${{ format('winetd-{0}.msi', github.ref) }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

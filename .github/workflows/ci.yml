@@ -1,0 +1,35 @@
+name: CI
+
+on: push
+
+jobs:
+  format:
+    runs-on: windows-latest
+
+    steps:
+      - uses: hecrj/setup-rust-action@master
+      - uses: actions/checkout@master
+      - name: Install rustfmt
+        run: rustup component add rustfmt
+      - name: rustfmt
+        run: cargo fmt -- --check
+
+  lint:
+    runs-on: windows-latest
+
+    steps:
+      - uses: hecrj/setup-rust-action@master
+      - uses: actions/checkout@master
+      - name: Install clippy
+        run: rustup component add clippy rustfmt
+      - name: clippy
+        run: cargo clippy --all-targets -- -D warnings
+
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - uses: hecrj/setup-rust-action@master
+      - uses: actions/checkout@master
+      - name: Cargo build
+        run: cargo build
