@@ -9,7 +9,7 @@
           <Directory Id='INSTALLDIR' Name='Winetd'>
             <Component Id='Winetd' Guid='D1E724F4-8B79-4937-BDC7-FB9EF458B6C5' Win64='yes'>
               <Environment Id="PATH" Name="PATH" Value="[INSTALLDIR]" Permanent="yes" Part="last" Action="set" System="yes" />
-              <File Id='WinetD' Name='winetd.exe' DiskId='1' Source='target\debug\winetd.exe'>
+              <File Id='WinetD' Name='winetd.exe' DiskId='1' Source='target\release\winetd.exe'>
               </File>
               <ServiceInstall Id='WinetdServiceInstall' Type='ownProcess' Name='Winetd'
                               DisplayName='Winetd Service' Description='Winetd Service'
