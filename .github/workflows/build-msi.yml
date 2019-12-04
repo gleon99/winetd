@@ -27,6 +27,8 @@ jobs:
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
-          files: winetd.msi
+          files: |
+            winetd.msi
+            target\release\winetd.exe
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
