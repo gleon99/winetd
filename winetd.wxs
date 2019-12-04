@@ -14,6 +14,7 @@
               <ServiceInstall Id='WinetdServiceInstall' Type='ownProcess' Name='Winetd'
                               DisplayName='Winetd Service' Description='Winetd Service'
                               Start='auto' ErrorControl='normal' />
+              <ServiceControl Id='WinetdServiceStart' Name='Winetd' Start='install' Stop='both' />
             </Component>
 
             <Component Id="RegistryEntries" Guid='80630C0C-27A6-4EDC-9296-68441536C8C8' Win64='yes'>
