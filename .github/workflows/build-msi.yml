@@ -13,12 +13,16 @@ jobs:
       - name: Cargo test
         run: cargo test
       - name: Download WiX
-        run: curl -LS https://github.com/wixtoolset/wix3/releases/download/wix3111rtm/wix311.exe > $env:temp\wix311.exe
+        shell: cmd
+        run: curl.exe -LS https://github.com/wixtoolset/wix3/releases/download/wix3111rtm/wix311.exe > wix311.exe
       - name: Install WiX
-        run: '"$env:temp\wix311.exe" "/install" "/quiet" "/norestart"'
+        shell: cmd
+        run: wix311.exe /install /quiet /norestart
       - name: Prepare MSI file
+        shell: cmd
         run: '"%PROGRAMFILES(x86)%\WiX Toolset v3.11\bin\candle.exe" "winetd.wxs"'
       - name: Link MSI
+        shell: cmd
         run: '"%PROGRAMFILES(x86)%\WiX Toolset v3.11\bin\light.exe" "winetd.wixobj" "-out" "winetd-%GITHUB_REF%.msi"'
       - name: Release
         uses: softprops/action-gh-release@v1
