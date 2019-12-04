@@ -1,6 +1,7 @@
 name: Release MSI
 
-on: push
+on:
+  push: tags
 
 jobs:
   build-winetd-msi:
